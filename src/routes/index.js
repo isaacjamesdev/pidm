@@ -6,6 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Home from '../pages/Home';
 import Activities from '../pages/Activities';
 import Profile from '../pages/Profile';
+import SignUp from '../pages/SignUp';
 
 const navigationTheme = {
   ...DefaultTheme,
@@ -26,7 +27,7 @@ const Routes = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="Atividades"
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: '#694fad' }}
@@ -56,6 +57,16 @@ const Routes = () => {
           component={Profile}
           options={{
             tabBarLabel: 'Profile',
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="person" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{
+            tabBarLabel: 'SignUp',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="person" color={color} size={26} />
             ),

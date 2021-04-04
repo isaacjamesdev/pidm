@@ -1,17 +1,63 @@
 import React from 'react';
 import * as S from './Styled';
 
-const Card = ({ secao = "123", cityCode = "321", sent = true }) => (
+const Card = ({ activities = [] }) => (
   <S.Wrap>
-    <S.Highlight>
-      <S.StatusText sent={sent}>
-        {`${'\u2B24'}  ${sent ? 'ENVIADO' : 'PENDENTE'}`}
-      </S.StatusText>
+    <S.Highlight head>
+      <S.HeadBlock head>
+        <S.HeadText sent>
+          Submetido
+        </S.HeadText>
+      </S.HeadBlock>
+      <S.HeadBlock head>
+        <S.HeadText>
+          Descrição
+        </S.HeadText>
+      </S.HeadBlock>
+      <S.HeadBlock head>
+        <S.HeadText>
+          Categoria
+        </S.HeadText>
+      </S.HeadBlock>
+      <S.HeadBlock head>
+        <S.HeadText>
+          Horas R.
+        </S.HeadText>
+      </S.HeadBlock>
+      <S.HeadBlock head>
+        <S.HeadText>
+          Horas C.
+        </S.HeadText>
+      </S.HeadBlock>
     </S.Highlight>
-    <S.Content>
-      <S.Text>Seção: {secao}</S.Text>
-      <S.Text>Município: {cityCode}</S.Text>
-    </S.Content>
+    {activities.length ?
+      activities.map((i, idx) =>
+      (
+        <S.Highlight key={idx}>
+          <S.HeadBlock>
+            <S.StatusText sent={i.sent}>
+              {`${'\u2B24'}`}
+            </S.StatusText>
+          </S.HeadBlock>
+          <S.HeadBlock>
+            <S.Text>{i.description}</S.Text>
+          </S.HeadBlock>
+          <S.HeadBlock>
+            <S.Text>{i.category}</S.Text>
+          </S.HeadBlock>
+          <S.HeadBlock>
+            <S.Text>{i.hr}</S.Text>
+          </S.HeadBlock>
+          <S.HeadBlock>
+            <S.Text>{i.hc}</S.Text>
+          </S.HeadBlock>
+        </S.Highlight>
+      ))
+      :
+      <S.Text>
+        Não há atividades registradas
+      </S.Text>
+    }
   </S.Wrap>
 );
 

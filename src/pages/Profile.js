@@ -6,7 +6,6 @@ import Title from '../components/title';
 const Profile = () => (
   <DefaultContainer>
       <Title>Profile</Title>
-      <Card />
   </DefaultContainer>
 );
 
