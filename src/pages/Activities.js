@@ -1,30 +1,41 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Card from '../components/card/Card';
 import DefaultContainer from '../components/defaultContainer/DefaultContainer';
 import Title from '../components/title';
+import Button from '../components/button';
+import { getActivities, setActivity } from '../hooks/Activities';
+import Loading from '../components/loading/Loading';
 
-const activities = [
-  {
-    description: "Egua",
-    category: "3",
-    hr: "34",
-    hc: "32",
-    sent: true
-  },
-  {
-    description: "sapoha",
-    category: "1",
-    hr: "20",
-    hc: "12",
-    sent: true
-  },
-]
+const Activities = () => {
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const Activities = () => (
-  <DefaultContainer>
-      <Title>Activities</Title>
-      <Card activities={activities}/>
-  </DefaultContainer>
-);
+  useEffect(()=>{
+    getActivities().then(data => {
+      setActivities(data);
+    }).finally(()=>{
+      setLoading(false);
+    })
+  }, [])
+  
+  return (
+    <DefaultContainer>
+        <Title>Activities</Title>
+        {loading ? <Loading /> : <Card activities={activities}/>}
+        <Button 
+          title="Get"
+          onPress={getActivities}
+        />
+        <Button 
+          title="Set"
+          onPress={()=> {
+            setActivity(activities[1])
+            console.log("SET")
+  
+          }}
+        />
+    </DefaultContainer>
+  );
+}
 
 export default Activities;
