@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Text = styled.Text`
-  font-size: 12px;
+  font-size: 14px;
   flex: 1;
   color: #3e2465;
   text-align: center;
@@ -22,6 +22,16 @@ export const HeadBlock = styled.View`
   justify-content: center;
   border-color: ${({head}) => !head ? '#3e2465': 'white'};
 `;
+
+export const BottomBlock = styled.View`
+  border: 1px solid #3e2465;
+  padding: 4px 5px;
+  width: 33.3%;
+  align-items: center;
+  justify-content: center;
+  border-color: ${({head}) => !head ? '#3e2465': 'white'};
+`;
+
 export const HeadText = styled(Text)`
   color: white;
   font-size: 14px;
@@ -36,5 +46,10 @@ export const Wrap = styled.View`
 export const Highlight = styled.View`
   background: ${({head}) => head ? '#3e2465': 'white'};
   flex-direction: row;
-  margin-bottom: ${({head}) => head ? '10px': '4px'}
+`;
+
+export const Bottomlight = styled.View`
+  background: ${({head}) => head ? '#3e2465': 'white'};
+  flex-direction: row;
+  margin-bottom: 10px;
 `;

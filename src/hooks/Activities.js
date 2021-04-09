@@ -1,4 +1,3 @@
-
 import * as firebase from 'firebase'
 import 'firebase/firestore';
 
@@ -23,7 +22,10 @@ export const getActivities = async () => {
   try {
     const snapshot = await db.collection(ACTIVITIES_COLLECTION).get();
     snapshot.forEach((doc) => {
-      activities.push(doc.data());
+      activities.push({
+        id: doc.id,
+        ...doc.data()
+      });
     });
     return activities || [];
   } catch (error) {
@@ -39,6 +41,22 @@ export const setActivity = (activity) => {
   }
 }
 
+export const editActivity = (id, activity) => {
+  try {
+    db.collection(ACTIVITIES_COLLECTION).doc(id).set(activity)
+  } catch (error) {
+    throw new Error("ops! Algo deu errado");
+  }
+}
+
+export const deleteActivity = (id) => {
+  try {
+    db.collection(ACTIVITIES_COLLECTION).doc(id).delete()
+  } catch (error) {
+    throw new Error("ops! Algo deu errado");
+  }
+}
+
 export const getStudents = async (matricula) => {
   const students = [];
   try {
@@ -48,7 +66,10 @@ export const getStudents = async (matricula) => {
     } else {
       const snapshot = await db.collection(STUDENT_COLLECTION).get();
       snapshot.forEach((doc) => {
-        students.push(doc.data());
+        students.push({
+          id: doc.id,
+          ...doc.data()
+        });
       });
       return snapshot || [];
     }
@@ -60,6 +81,14 @@ export const getStudents = async (matricula) => {
 export const setStudent = (student) => {
   try {
     db.collection(STUDENT_COLLECTION).doc(student.matricula).set(student)
+  } catch (error) {
+    throw new Error("ops! Algo deu errado");
+  }
+}
+
+export const deleteStudent = (id) => {
+  try {
+    db.collection(STUDENT_COLLECTION).doc(id).delete()
   } catch (error) {
     throw new Error("ops! Algo deu errado");
   }

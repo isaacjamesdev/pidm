@@ -1,4 +1,8 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
+import { MaterialIcons, MaterialCommunityIcons, AntDesign } from 'react-native-vector-icons';
+import { deleteActivity, editActivity, setActivity } from '../../hooks/Activities';
+import CheckBox from '../checkbox';
 import * as S from './Styled';
 
 const Card = ({ activities = [] }) => (
@@ -33,25 +37,53 @@ const Card = ({ activities = [] }) => (
     {activities.length ?
       activities.map((i, idx) =>
       (
-        <S.Highlight key={idx}>
-          <S.HeadBlock>
-            <S.StatusText sent={i.sent}>
-              {`${'\u2B24'}`}
-            </S.StatusText>
-          </S.HeadBlock>
-          <S.HeadBlock>
-            <S.Text>{i.description}</S.Text>
-          </S.HeadBlock>
-          <S.HeadBlock>
-            <S.Text>{i.category}</S.Text>
-          </S.HeadBlock>
-          <S.HeadBlock>
-            <S.Text>{i.hr}</S.Text>
-          </S.HeadBlock>
-          <S.HeadBlock>
-            <S.Text>{i.hc}</S.Text>
-          </S.HeadBlock>
-        </S.Highlight>
+        <>
+          <S.Highlight key={i.id}>
+            <S.HeadBlock>
+              <S.StatusText sent={i.sent}>
+                {`${'\u2B24'}`}
+              </S.StatusText>
+            </S.HeadBlock>
+            <S.HeadBlock>
+              <S.Text>{i.description}</S.Text>
+            </S.HeadBlock>
+            <S.HeadBlock>
+              <S.Text>{i.category}</S.Text>
+            </S.HeadBlock>
+            <S.HeadBlock>
+              <S.Text>{i.hr}</S.Text>
+            </S.HeadBlock>
+            <S.HeadBlock>
+              <S.Text>{i.hc}</S.Text>
+            </S.HeadBlock>
+          </S.Highlight>
+          <S.Bottomlight key={i.id}>
+            <S.BottomBlock>
+              <TouchableOpacity
+                onPress={() => console.log("pencil")}
+                hitSlop={{ top: 20, bottom: 20, left: 100, right: 100 }}
+              >
+                <MaterialCommunityIcons name="pencil" color={"#3e2465"} size={18} />
+              </TouchableOpacity>
+            </S.BottomBlock>
+            <S.BottomBlock>
+              <CheckBox
+                onChange={value => editActivity(i.id, {
+                  ...i,
+                  sent: value
+                })}
+                checked={!!i.sent}
+              />
+            </S.BottomBlock>
+            <S.BottomBlock>
+              <TouchableOpacity
+                onPress={() => deleteActivity(i.id)}
+              >
+                <MaterialCommunityIcons name="trash-can" color={"#3e2465"} size={18} />
+              </TouchableOpacity>
+            </S.BottomBlock>
+          </S.Bottomlight>
+        </>
       ))
       :
       <S.Text>

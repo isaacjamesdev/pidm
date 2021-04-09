@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Home from '../pages/Home';
+import { MaterialIcons, MaterialCommunityIcons, AntDesign } from 'react-native-vector-icons';
 import Activities from '../pages/Activities';
 import Profile from '../pages/Profile';
-import SignUp from '../pages/SignUp';
+import RegisterActivity from '../pages/RegisterActivity';
+import EditActivity from '../pages/EditActivity';
 
 const navigationTheme = {
   ...DefaultTheme,
@@ -33,16 +32,6 @@ const Routes = () => {
         barStyle={{ backgroundColor: '#694fad' }}
       >
         <Tab.Screen
-          name="Home"
-          component={Home}
-          options={{
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
-            ),
-          }}
-        />
-        <Tab.Screen
           name="Atividades"
           component={Activities}
           options={{
@@ -53,20 +42,30 @@ const Routes = () => {
           }}
         />
         <Tab.Screen
-          name="Profile"
-          component={Profile}
+          name="Cadastrar"
+          component={RegisterActivity}
           options={{
-            tabBarLabel: 'Profile',
+            tabBarLabel: 'Cadastrar',
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="person" color={color} size={26} />
+              <AntDesign name="pluscircleo" color={color} size={23} />
             ),
           }}
         />
         <Tab.Screen
-          name="SignUp"
-          component={SignUp}
+          name="Editar"
+          component={EditActivity}
           options={{
-            tabBarLabel: 'SignUp',
+            tabBarLabel: 'Editar',
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="pencil" color={color} size={23} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: 'Profile',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="person" color={color} size={26} />
             ),
