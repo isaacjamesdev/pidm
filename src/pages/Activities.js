@@ -3,7 +3,7 @@ import Card from '../components/card/Card';
 import DefaultContainer from '../components/defaultContainer/DefaultContainer';
 import Title from '../components/title';
 import Button from '../components/button';
-import { getActivities, setActivity } from '../hooks/Activities';
+import { getActivities } from '../hooks/useActivities';
 import Loading from '../components/loading';
 import CheckBox from '../components/checkbox';
 

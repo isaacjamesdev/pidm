@@ -4,12 +4,9 @@ import DefaultContainer from '../components/defaultContainer/DefaultContainer';
 import TextInput from '../components/TextInput/TextInput';
 import Title from '../components/title';
 
-const SignUp = () => {
+const SignIn = () => {
   const [newStudent, setNewStudent] = useState({
     matricula: '',
-    nome: '',
-    curso: '',
-    horasNecessarias: '',
     senha: '',
   });
 
@@ -22,28 +19,11 @@ const SignUp = () => {
 
   return (
     <DefaultContainer>
-      <Title>Sign Up</Title>
+      <Title>Login</Title>
       <TextInput
         placeholder="Matricula"
         value={newStudent.category}
         onChangeText={value => setField("matricula", value)}
-        keyboardType="numeric"
-      />
-      <TextInput
-        placeholder="Nome"
-        value={newStudent.description}
-        onChangeText={value => setField("nome", value)}
-      />
-      <TextInput
-        placeholder="Curso"
-        value={newStudent.hr}
-        onChangeText={value => setField("curso", value)}
-        keyboardType="numeric"
-      />
-      <TextInput
-        placeholder="Horas Becessarias"
-        value={newStudent.hc}
-        onChangeText={value => setField("horasNecessarias", value)}
         keyboardType="numeric"
       />
       <TextInput
@@ -53,13 +33,18 @@ const SignUp = () => {
       />
 
       <Button
-        title="Cadastre-se"
+        title="Entrar"
         // onPress={() => setNewStudent(newStudent)}
         onPress={() => console.log(newStudent)}
         primary
+      />
+      <Button
+        title="Cadastre-se"
+        // onPress={() => setNewStudent(newStudent)}
+        onPress={() => console.log(newStudent)}
       />
     </DefaultContainer>
   );
 }
 
-export default SignUp;
+export default SignIn;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { MaterialIcons, MaterialCommunityIcons, AntDesign } from 'react-native-vector-icons';
-import { deleteActivity, editActivity, setActivity } from '../../hooks/Activities';
+import { deleteActivity, editActivity, setActivity } from '../../hooks/useActivities';
 import CheckBox from '../checkbox';
 import * as S from './Styled';
 

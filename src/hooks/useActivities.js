@@ -57,12 +57,15 @@ export const deleteActivity = (id) => {
   }
 }
 
+/* ------------------------------------ */
+
 export const getStudents = async (matricula) => {
   const students = [];
   try {
     if (!!matricula) {
       const student = await db.collection(STUDENT_COLLECTION).doc(matricula).get();
-      return student;
+      console.log("veishhhh");
+      return student.data();
     } else {
       const snapshot = await db.collection(STUDENT_COLLECTION).get();
       snapshot.forEach((doc) => {
@@ -81,6 +84,15 @@ export const getStudents = async (matricula) => {
 export const setStudent = (student) => {
   try {
     db.collection(STUDENT_COLLECTION).doc(student.matricula).set(student)
+  } catch (error) {
+    throw new Error("ops! Algo deu errado");
+  }
+}
+
+
+export const editStudent = (matricula, student) => {
+  try {
+    db.collection(ACTIVITIES_COLLECTION).doc(matricula).set(student)
   } catch (error) {
     throw new Error("ops! Algo deu errado");
   }

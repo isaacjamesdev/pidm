@@ -3,7 +3,7 @@ import DefaultContainer from "../components/defaultContainer/DefaultContainer";
 import Title from "../components/title";
 import TextInput from "../components/TextInput";
 import Button from "../components/button";
-import { setActivity } from "../hooks/Activities";
+import { setActivity } from "../hooks/useActivities";
 
 const RegisterActivity = () => {
   const [activity, setActivityForm] = useState({});
