@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SignUp from '../pages/signUp';
+import SignUp from '../pages/SignUp';
 import SignIn from '../pages/SignIn';
 import AppRoutes from './AppRoutes';
 import ActivityForm from '../pages/EditActivity';

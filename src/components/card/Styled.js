@@ -7,6 +7,7 @@ export const Text = styled.Text`
   text-align: center;
   align-self: center;
   color: #3e2465;
+  padding: 30px;
 `;
 
 export const StatusText = styled(Text)`

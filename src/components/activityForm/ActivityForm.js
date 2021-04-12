@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import DefaultContainer from "../defaultContainer/DefaultContainer";
 import Title from "../title";
-import TextInput from "../TextInput";
+import TextInput from "../textInput";
 import Button from "../button";
 import { editActivity } from "../../hooks/Activities";
 

@@ -1,15 +1,18 @@
 import React, { useState, useCallback } from "react";
 import DefaultContainer from "../components/defaultContainer/DefaultContainer";
 import Title from "../components/title";
-import TextInput from "../components/TextInput";
+import TextInput from "../components/textInput";
 import Button from "../components/button";
 import { setActivity } from "../hooks/useActivities";
 import { useAuth } from "../hooks/useAuth";
 import { feedBackAlert } from "../utils/feedbackAlert";
+import { useNavigation } from "@react-navigation/core";
 
 const RegisterActivity = () => {
   const [activity, setActivityForm] = useState({});
   const { user } = useAuth();
+
+  const navigation = useNavigation();
 
   const setField = useCallback((field, value) => {
     setActivityForm(oldState => ({

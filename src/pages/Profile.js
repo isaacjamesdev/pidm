@@ -1,9 +1,11 @@
+import { useNavigation } from '@react-navigation/core';
 import React, { useState, useEffect, useCallback } from 'react';
 import Button from '../components/button/Button';
 import DefaultContainer from '../components/defaultContainer/DefaultContainer';
 import ProfileImage from '../components/profileImage';
-import TextInput from '../components/TextInput/TextInput';
+import TextInput from '../components/textInput';
 import Title from '../components/title';
+import FirebaseStorageUploader from '../components/upload/ImageUpload';
 import { getStudents, setStudent } from '../hooks/useActivities';
 import { useAuth } from '../hooks/useAuth';
 import { feedBackAlert } from '../utils/feedbackAlert';
@@ -18,6 +20,8 @@ const Profile = () => {
   });
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     getStudents(user.matricula).then(data => {
@@ -38,9 +42,8 @@ const Profile = () => {
   return (
     <DefaultContainer>
       <Title>Profile</Title>
-      <ProfileImage
-      // src=""
-      />
+      <ProfileImage />
+      <FirebaseStorageUploader />
       <TextInput
         placeholder="Matricula"
         value={newStudent.matricula}

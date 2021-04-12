@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import Button from '../components/button/Button';
 import DefaultContainer from '../components/defaultContainer/DefaultContainer';
-import TextInput from '../components/TextInput/TextInput';
+import TextInput from '../components/textInput';
 import Title from '../components/title';
 import { setStudent } from '../hooks/useActivities';
 import { feedBackAlert } from '../utils/feedbackAlert';
