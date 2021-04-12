@@ -11,7 +11,6 @@ const Tab = createMaterialBottomTabNavigator();
 
 const AppRoutes = () => {
   return (
-    <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Atividades"
         activeColor="#f0edf6"
@@ -39,16 +38,6 @@ const AppRoutes = () => {
           }}
         />
         <Tab.Screen
-          name="Editar"
-          component={EditActivity}
-          options={{
-            tabBarLabel: 'Editar',
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="pencil" color={color} size={23} />
-            ),
-          }}
-        />
-        <Tab.Screen
           name="Profile"
           component={Profile}
           options={{
@@ -59,7 +48,6 @@ const AppRoutes = () => {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 };
 

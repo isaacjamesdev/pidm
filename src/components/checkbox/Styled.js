@@ -13,7 +13,7 @@ export const ContainerBox = styled.View`
 export const FilledBox = styled.View`
   height: 18px;
   width: 18px;
-  background: ${({ sent }) => sent ? "#3e2465" : 'transparent'};
+  background: ${({ sent }) => sent ? "green" : 'transparent'};
   align-self: center;
   align-items: center;
 `;

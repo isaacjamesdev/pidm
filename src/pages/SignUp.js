@@ -3,6 +3,8 @@ import Button from '../components/button/Button';
 import DefaultContainer from '../components/defaultContainer/DefaultContainer';
 import TextInput from '../components/TextInput/TextInput';
 import Title from '../components/title';
+import { setStudent } from '../hooks/useActivities';
+import { feedBackAlert } from '../utils/feedbackAlert';
 
 const SignUp = () => {
   const [newStudent, setNewStudent] = useState({
@@ -54,8 +56,15 @@ const SignUp = () => {
 
       <Button
         title="Cadastre-se"
-        // onPress={() => setNewStudent(newStudent)}
-        onPress={() => console.log(newStudent)}
+        onPress={() => setStudent(newStudent).then(() => {
+          feedBackAlert("Sucesso", "Cadastrado com sucesso!", () => {
+            navigation.navigate("SignIn");
+          })
+        }).catch(()=>{
+          feedBackAlert("Ops!", "Falha ao cadastrr!", () => {
+            navigation.navigate("SignIn");
+          })
+        })}
         primary
       />
     </DefaultContainer>

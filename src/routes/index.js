@@ -3,16 +3,21 @@ import { useAuth } from '../hooks/useAuth';
 
 import AuthRoutes from './AuthRoutes';
 import AppRoutes from './AppRoutes';
-
+import { NavigationContainer } from '@react-navigation/native';
 const Routes = () => {
-  // const { token } = useAuth();
-  // const token = true;
-  const token = false;
+  const { authenticated } = useAuth();
+  return (
+    <NavigationContainer>
+      {/* {authenticated ?
+        <AppRoutes />
+        :
+        <AuthRoutes />
+      } */}
+      <AuthRoutes />
+    )
 
-  return token ?
-    <AppRoutes />
-    :
-    <AuthRoutes />
+  </NavigationContainer>
+  )
 };
 
 export default Routes;

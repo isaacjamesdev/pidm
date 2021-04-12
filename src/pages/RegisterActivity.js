@@ -4,15 +4,18 @@ import Title from "../components/title";
 import TextInput from "../components/TextInput";
 import Button from "../components/button";
 import { setActivity } from "../hooks/useActivities";
+import { useAuth } from "../hooks/useAuth";
+import { feedBackAlert } from "../utils/feedbackAlert";
 
 const RegisterActivity = () => {
   const [activity, setActivityForm] = useState({});
+  const { user } = useAuth();
 
   const setField = useCallback((field, value) => {
     setActivityForm(oldState => ({
       ...oldState,
       [field]: value,
-      sent: true
+      sent: false
     }), [activity])
   });
 
@@ -42,15 +45,21 @@ const RegisterActivity = () => {
         onChangeText={value => setField("hc", value)}
         keyboardType="numeric"
       />
-      <TextInput
-        placeholder="Submetido"
-        value={activity.sent}
-        onChangeText={value => setField("sent", value)}
-      />
 
       <Button
         title="Cadastrar"
-        onPress={() => setActivity(activity)}
+        onPress={() => {
+          try {
+            setActivity(user.matricula, activity)
+            feedBackAlert("Sucesso", "Cadastrado com sucesso!", () => {
+              navigation.navigate("Atividades");
+            })
+          } catch (error) {
+            feedBackAlert("Ops!", "Falha ao cadastrar!", () => {
+              navigation.navigate("Atividades");
+            })
+          }
+        }}
         primary
       />
     </DefaultContainer>

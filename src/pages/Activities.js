@@ -5,29 +5,35 @@ import Title from '../components/title';
 import Button from '../components/button';
 import { getActivities } from '../hooks/useActivities';
 import Loading from '../components/loading';
-import CheckBox from '../components/checkbox';
+import { useAuth } from '../hooks/useAuth';
+
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
-  useEffect(() => {
-    getActivities().then(data => {
+  const refresh = ()=>{
+    setLoading(true)
+    getActivities(user.matricula).then(data => {
       setActivities(data);
     }).finally(() => {
       setLoading(false);
     })
+  }
+  
+  useEffect(() => {
+    refresh();
   }, [])
 
   return (
     <DefaultContainer>
       <Title>Activities</Title>
-      {loading ? <Loading /> : <Card activities={activities} />}
       <Button
-        title="Get"
-        onPress={getActivities}
+        title="Atualizar"
+        onPress={refresh}
       />
-      <CheckBox />
+      {loading ? <Loading /> : <Card activities={activities} />}
     </DefaultContainer>
   );
 }

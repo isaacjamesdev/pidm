@@ -2,7 +2,6 @@ import * as firebase from 'firebase'
 import 'firebase/firestore';
 
 const STUDENT_COLLECTION = "alunos";
-const ACTIVITIES_COLLECTION = "atividades";
 
 var firebaseConfig = {
   apiKey: "AIzaSyALPVEepVs0ornjTDILyYp8bPgXKqgutf4",
@@ -17,43 +16,46 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-export const getActivities = async () => {
+export const getActivities = async (matricula) => {
   const activities = [];
   try {
-    const snapshot = await db.collection(ACTIVITIES_COLLECTION).get();
-    snapshot.forEach((doc) => {
-      activities.push({
-        id: doc.id,
-        ...doc.data()
+    const snapshot = await db.collection(matricula).get();
+    
+    if(snapshot && snapshot.forEach){
+      snapshot.forEach((doc) => {
+        activities.push({
+          id: doc.id,
+          ...doc.data()
+        });
       });
-    });
+    }
     return activities || [];
   } catch (error) {
-    throw new Error("ops! Algo deu errado");
+    alert("ops! Reinicie o APP")
   }
 }
 
-export const setActivity = (activity) => {
+export const setActivity = (matricula, activity) => {
   try {
-    db.collection(ACTIVITIES_COLLECTION).doc().set(activity)
+    db.collection(matricula).doc().set(activity)
   } catch (error) {
-    throw new Error("ops! Algo deu errado");
+    alert("ops! Reinicie o APP")
   }
 }
 
-export const editActivity = (id, activity) => {
+export const editActivity = (matricula, id, activity) => {
   try {
-    db.collection(ACTIVITIES_COLLECTION).doc(id).set(activity)
+    db.collection(matricula).doc(id).set(activity)
   } catch (error) {
-    throw new Error("ops! Algo deu errado");
+    alert("ops! Reinicie o APP")
   }
 }
 
-export const deleteActivity = (id) => {
+export const deleteActivity = (matricula, id) => {
   try {
-    db.collection(ACTIVITIES_COLLECTION).doc(id).delete()
+    db.collection(matricula).doc(id).delete()
   } catch (error) {
-    throw new Error("ops! Algo deu errado");
+    alert("ops! Reinicie o APP")
   }
 }
 
@@ -64,7 +66,6 @@ export const getStudents = async (matricula) => {
   try {
     if (!!matricula) {
       const student = await db.collection(STUDENT_COLLECTION).doc(matricula).get();
-      console.log("veishhhh");
       return student.data();
     } else {
       const snapshot = await db.collection(STUDENT_COLLECTION).get();
@@ -77,7 +78,7 @@ export const getStudents = async (matricula) => {
       return snapshot || [];
     }
   } catch (error) {
-    throw new Error("ops! Algo deu errado");
+    alert("ops! Reinicie o APP")
   }
 }
 
@@ -85,16 +86,16 @@ export const setStudent = (student) => {
   try {
     db.collection(STUDENT_COLLECTION).doc(student.matricula).set(student)
   } catch (error) {
-    throw new Error("ops! Algo deu errado");
+    alert("ops! Reinicie o APP")
   }
 }
 
 
 export const editStudent = (matricula, student) => {
   try {
-    db.collection(ACTIVITIES_COLLECTION).doc(matricula).set(student)
+    db.collection(STUDENT_COLLECTION).doc(matricula).set(student)
   } catch (error) {
-    throw new Error("ops! Algo deu errado");
+    alert("ops! Reinicie o APP")
   }
 }
 
@@ -102,6 +103,6 @@ export const deleteStudent = (id) => {
   try {
     db.collection(STUDENT_COLLECTION).doc(id).delete()
   } catch (error) {
-    throw new Error("ops! Algo deu errado");
+    alert("ops! Reinicie o APP")
   }
 }

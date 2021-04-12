@@ -3,13 +3,13 @@ import DefaultContainer from "../components/defaultContainer/DefaultContainer";
 import Title from "../components/title";
 import TextInput from "../components/textInput";
 import Button from "../components/button";
-import { editActivity, setActivity } from "../hooks/useActivities";
+import { editActivity } from "../hooks/useActivities";
 
-const ActivityForm = ({ activity }) => {
+const ActivityForm = ({ route }) => {
   const [newActivity, setNewActivity] = useState({});
 
   useEffect(() => {
-    setNewActivity(activity || {
+    setNewActivity(route.params.activity || {
       category: 1,
       description: 'Esta merda',
       hc: 12,
@@ -53,12 +53,6 @@ const ActivityForm = ({ activity }) => {
         onChangeText={value => setField("hc", value)}
         keyboardType="numeric"
       />
-      <TextInput
-        placeholder="Submetido"
-        value={newActivity.sent}
-        onChangeText={value => setField("sent", value)}
-      />
-
       <Button
         title="Salvar"
         onPress={() => editActivity(newActivity.id, newActivity)}

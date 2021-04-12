@@ -26,7 +26,7 @@ export const HeadBlock = styled.View`
 export const BottomBlock = styled.View`
   border: 1px solid #3e2465;
   padding: 4px 5px;
-  width: 33.3%;
+  width: 50%;
   align-items: center;
   justify-content: center;
   border-color: ${({head}) => !head ? '#3e2465': 'white'};

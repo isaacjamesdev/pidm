@@ -5,6 +5,8 @@ import ProfileImage from '../components/profileImage';
 import TextInput from '../components/TextInput/TextInput';
 import Title from '../components/title';
 import { getStudents, setStudent } from '../hooks/useActivities';
+import { useAuth } from '../hooks/useAuth';
+import { feedBackAlert } from '../utils/feedbackAlert';
 
 const Profile = () => {
   const [newStudent, setNewStudent] = useState({
@@ -15,9 +17,10 @@ const Profile = () => {
     senha: '',
   });
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
-    getStudents("390242").then(data => {
+    getStudents(user.matricula).then(data => {
       if (data)
         setNewStudent(data);
     }).finally(() => {
@@ -69,9 +72,18 @@ const Profile = () => {
       />
 
       <Button
-        title="Cadastrar"
-        // onPress={() => setNewStudent(newStudent)}
-        onPress={() => setStudent(newStudent)}
+        title="Atualizar"
+        onPress={() => {
+          try {
+            setStudent(newStudent);
+            feedBackAlert("Sucesso", "Atualizado com sucesso!", () => {
+              navigation.navigate("Atividades");
+            })
+          } catch (error) {
+            feedBackAlert("Ops!", "Algo deu errado!", () => {
+            })
+          }
+        }}
         primary
       />
     </DefaultContainer>
